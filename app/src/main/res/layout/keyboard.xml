@@ -1,0 +1,97 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_1"
+                style="@style/ButtonKeyboardStyle"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/button_2"
+                style="@style/ButtonKeyboardStyle"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/button_3"
+                style="@style/ButtonKeyboardStyle"
+                android:text="3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_4"
+                style="@style/ButtonKeyboardStyle"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/button_5"
+                style="@style/ButtonKeyboardStyle"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/button_6"
+                style="@style/ButtonKeyboardStyle"
+                android:text="6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_7"
+                style="@style/ButtonKeyboardStyle"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/button_8"
+                style="@style/ButtonKeyboardStyle"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/button_9"
+                style="@style/ButtonKeyboardStyle"
+                android:text="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_delete"
+                style="@style/ButtonKeyboardStyle"
+                android:text="Delete" />
+
+            <Button
+                android:id="@+id/button_0"
+                style="@style/ButtonKeyboardStyle"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/button_enter"
+                style="@style/ButtonKeyboardStyle"
+                android:text="Enter" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</merge>

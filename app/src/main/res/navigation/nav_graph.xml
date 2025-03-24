@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.applications.weedingappcompetitions.StartFragment"
+        android:label="fragment_calc"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_startFragment_to_competitionFragment"
+            app:destination="@id/competitionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/competitionFragment"
+        android:name="com.applications.weedingappcompetitions.CompetitionFragment"
+        android:label="fragment_competition"
+        tools:layout="@layout/fragment_competition" >
+        <action
+            android:id="@+id/action_competitionFragment_to_gamingFragment"
+            app:destination="@id/gamingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gamingFragment"
+        android:name="com.applications.weedingappcompetitions.GamersFragment"
+        android:label="fragment_gaming"
+        tools:layout="@layout/fragment_gamers" />
+</navigation>
