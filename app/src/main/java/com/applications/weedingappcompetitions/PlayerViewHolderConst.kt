@@ -6,6 +6,7 @@ import com.applications.weedingappcompetitions.databinding.ItemPlayerConstBindin
 
 class PlayerViewHolderConst(
     itemView: View,
+    private val players: List<Player>,
     private val playerClickListener: PlayerClickListener
 ) :
     RecyclerView.ViewHolder(itemView) {
@@ -13,5 +14,6 @@ class PlayerViewHolderConst(
     fun bindPosition(position: Int) {
         val pos = position + 1
         binding.numPlayer.text = pos.toString()
+        binding.textViewName.text = players[position].name
     }
 }

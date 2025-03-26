@@ -4,4 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Players(private val mapPlayers: MutableList<Player>) : Parcelable
+data class Players(private val mapPlayers: MutableList<Player>) : Parcelable {
+    fun get() = mapPlayers
+}
