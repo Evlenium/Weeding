@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.applications.weedingappcompetitions.databinding.FragmentCompetitionBinding
+import com.google.gson.Gson
 
 class CompetitionFragment : Fragment() {
 
@@ -36,6 +37,7 @@ class CompetitionFragment : Fragment() {
         val playerList =
             MutableList(numParticipants) { index -> Player(id = index, name = "", vinNum = 0) }
         val playerAdapter = PlayerAdapter(playerList)
+        val gson = Gson()
         with(binding) {
             recyclerView.adapter = playerAdapter
             buttonApply.setOnClickListener {

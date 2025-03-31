@@ -52,5 +52,5 @@ dependencies {
 
     implementation(libs.navigation.ui.ktx)
     implementation(libs.navigation.fragment)
-//    implementation(libs.com.google.code.gson)
+    implementation(libs.com.google.code.gson)
 }
