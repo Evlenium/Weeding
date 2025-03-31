@@ -34,6 +34,7 @@ class GamersFragment : Fragment() {
         val resultPlayers = mapPlayers?.get()?.toList() ?: emptyList()
         val playerAdapter = PlayerAdapterConst(players = resultPlayers) {
             Log.d("MyTag", mapPlayers.toString())
+
         }
         with(binding) {
             recyclerView.adapter = playerAdapter

@@ -8,7 +8,6 @@ import com.applications.weedingappcompetitions.databinding.ItemPlayerBinding
 class PlayerViewHolder(
     itemView: View,
     private val players: List<Player>,
-    private val saveNameListener: SaveNameListener
 ) :
     RecyclerView.ViewHolder(itemView) {
     private val binding = ItemPlayerBinding.bind(itemView)
@@ -21,7 +20,6 @@ class PlayerViewHolder(
             afterTextChanged = { s ->
                 if (!s.isNullOrEmpty()) {
                     players[position].name = s.toString()
-                    saveNameListener.onSave(players)
                 }
             })
     }
