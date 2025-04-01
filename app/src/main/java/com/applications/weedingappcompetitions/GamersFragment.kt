@@ -1,14 +1,17 @@
 package com.applications.weedingappcompetitions
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.applications.weedingappcompetitions.databinding.FragmentGamersBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GamersFragment : Fragment() {
     private var _binding: FragmentGamersBinding? = null
@@ -31,13 +34,35 @@ class GamersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val playerAdapter = PlayerAdapterConst {
-            Log.d("MyTag", mapPlayers.toString())
+        val resultPlayers = mapPlayers?.get()?.toList() ?: emptyList()
+        val playerAdapter = PlayerAdapterConst(players = resultPlayers) {
+            findNavController().navigate(
+                R.id.action_gamingFragment_to_fragmentGamer,
+                FragmentGamer.createArgs(it)
+            )
         }
         with(binding) {
             recyclerView.adapter = playerAdapter
         }
-        playerAdapter.submitList(emptyList())
+        playerAdapter.submitList(resultPlayers)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            showDialog()
+        }
+    }
+
+    private fun showDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Завершить игру")
+            .setMessage("Все несохраненные данные будут потеряны")
+            .setNegativeButton("Отмена") { dialog, which ->
+            }
+            .setPositiveButton("Завершить") { dialog, which ->
+                findNavController().popBackStack()
+                val sharedPreferences =
+                    requireContext().getSharedPreferences("players", Context.MODE_PRIVATE)
+                sharedPreferences.edit().clear().apply()
+            }
+            .show()
     }
 
     override fun onDestroyView() {

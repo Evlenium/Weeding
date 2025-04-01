@@ -8,44 +8,43 @@
     tools:context=".StartFragment">
 
     <TextView
-        android:id="@+id/textViewConstNumParticipants"
+        android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="48dp"
-        android:text="Введите количество участников"
+        android:layout_marginTop="16dp"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Имя" />
 
     <EditText
-        android:id="@+id/numWeight"
+        android:id="@+id/editTextNumWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_margin="16dp"
         android:background="@null"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="Количество участников"
+        android:hint="Вес напитка"
         android:inputType="number"
         android:lines="1"
         android:singleLine="true"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonApply"
-        app:layout_constraintEnd_toEndOf="@+id/textViewConstNumParticipants"
-        app:layout_constraintStart_toStartOf="@+id/textViewConstNumParticipants"
-        app:layout_constraintTop_toBottomOf="@+id/textViewConstNumParticipants" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewName"
+        app:layout_constraintStart_toStartOf="@+id/textViewName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
 
     <com.applications.weedingappcompetitions.util.Keyboard
-        android:id="@+id/myKeyboard"
+        android:id="@+id/keyboardWeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewColdHot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -53,14 +52,39 @@
         android:id="@+id/buttonApply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="48dp"
+        android:layout_margin="16dp"
         android:backgroundTint="@color/black"
         android:text="Подвердить"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/myKeyboard"
-        app:layout_constraintEnd_toEndOf="@+id/numWeight"
-        app:layout_constraintStart_toStartOf="@+id/numWeight" />
+        app:layout_constraintBottom_toTopOf="@+id/keyboardWeight"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNumWeight"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumWeight" />
+
+    <TextView
+        android:id="@+id/textViewColdHot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginHorizontal="32dp"
+        android:gravity="center"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewRightAnswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Холоднее" />
+
+    <TextView
+        android:id="@+id/textViewRightAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginHorizontal="32dp"
+        android:rotation="180"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="100" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

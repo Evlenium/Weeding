@@ -18,7 +18,7 @@
         android:id="@+id/competitionFragment"
         android:name="com.applications.weedingappcompetitions.CompetitionFragment"
         android:label="fragment_competition"
-        tools:layout="@layout/fragment_competition" >
+        tools:layout="@layout/fragment_competition">
         <action
             android:id="@+id/action_competitionFragment_to_gamingFragment"
             app:destination="@id/gamingFragment" />
@@ -27,5 +27,14 @@
         android:id="@+id/gamingFragment"
         android:name="com.applications.weedingappcompetitions.GamersFragment"
         android:label="fragment_gaming"
-        tools:layout="@layout/fragment_gamers" />
+        tools:layout="@layout/fragment_gamers">
+        <action
+            android:id="@+id/action_gamingFragment_to_fragmentGamer"
+            app:destination="@id/fragmentGamer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentGamer"
+        android:name="com.applications.weedingappcompetitions.FragmentGamer"
+        android:label="fragment_gamer"
+        tools:layout="@layout/fragment_gamer" />
 </navigation>

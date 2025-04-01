@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 
 class PlayerAdapter(
     private val players: List<Player>,
-    private val saveNameListener: SaveNameListener
 ) :
     ListAdapter<Player, PlayerViewHolder>(Comparator()) {
 
@@ -27,6 +26,6 @@ class PlayerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_player, parent, false)
-        return PlayerViewHolder(view, players, saveNameListener)
+        return PlayerViewHolder(view, players)
     }
 }

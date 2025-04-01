@@ -1,5 +1,6 @@
 package com.applications.weedingappcompetitions
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.applications.weedingappcompetitions.databinding.FragmentCompetitionBinding
+import com.google.gson.Gson
 
 class CompetitionFragment : Fragment() {
 
@@ -30,11 +32,13 @@ class CompetitionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sharedPreferences =
+            requireContext().getSharedPreferences("players", Context.MODE_PRIVATE)
+        val gson = Gson()
         val playerList =
             MutableList(numParticipants) { index -> Player(id = index, name = "", vinNum = 0) }
-        val playerAdapter = PlayerAdapter(playerList) {
-
-        }
+        val playerAdapter = PlayerAdapter(playerList)
+        sharedPreferences.edit().putString("players", gson.toJson(playerList)).apply()
         with(binding) {
             recyclerView.adapter = playerAdapter
             buttonApply.setOnClickListener {
@@ -53,7 +57,7 @@ class CompetitionFragment : Fragment() {
 
     private fun createVinNum(listPlayer: MutableList<Player>): Players {
         listPlayer.map {
-            it.vinNum = (0..100).random()
+            it.vinNum = (0..13).random()
         }
         return Players(listPlayer)
     }
