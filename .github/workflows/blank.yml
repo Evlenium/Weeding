@@ -8,17 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       - name: Setup JDK 17 for build
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
-      - name: Access GH_MOVIES_ACCESS_TOKEN
-        env:
-          GH_MOVIES_ACCESS_TOKEN: ${{ secrets.GH_MOVIES_ACCESS_TOKEN }}
-        run: echo GH_MOVIES_ACCESS_TOKEN=\"$GH_MOVIES_ACCESS_TOKEN\" > ./local.properties
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Build the app
