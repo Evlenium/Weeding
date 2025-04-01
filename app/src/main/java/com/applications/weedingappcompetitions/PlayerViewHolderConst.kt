@@ -7,7 +7,6 @@ import com.applications.weedingappcompetitions.databinding.ItemPlayerConstBindin
 class PlayerViewHolderConst(
     itemView: View,
     private val players: List<Player>,
-    private val playerClickListener: PlayerClickListener
 ) :
     RecyclerView.ViewHolder(itemView) {
     private val binding = ItemPlayerConstBinding.bind(itemView)

@@ -1,5 +1,5 @@
 package com.applications.weedingappcompetitions
 
 fun interface PlayerClickListener {
-    fun onClick()
+    fun onClick(player: Player)
 }

@@ -23,6 +23,9 @@ class PlayerAdapterConst(
 
     override fun onBindViewHolder(holder: PlayerViewHolderConst, position: Int) {
         holder.bindPosition(position)
+        holder.itemView.setOnClickListener {
+            playerClickListener.onClick(players[position])
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolderConst {
@@ -30,7 +33,6 @@ class PlayerAdapterConst(
             LayoutInflater.from(parent.context).inflate(R.layout.item_player_const, parent, false)
         return PlayerViewHolderConst(
             view,
-            playerClickListener = playerClickListener,
             players = players
         )
     }

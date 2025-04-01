@@ -34,10 +34,11 @@ class CompetitionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val sharedPreferences =
             requireContext().getSharedPreferences("players", Context.MODE_PRIVATE)
+        val gson = Gson()
         val playerList =
             MutableList(numParticipants) { index -> Player(id = index, name = "", vinNum = 0) }
         val playerAdapter = PlayerAdapter(playerList)
-        val gson = Gson()
+        sharedPreferences.edit().putString("players", gson.toJson(playerList)).apply()
         with(binding) {
             recyclerView.adapter = playerAdapter
             buttonApply.setOnClickListener {
@@ -53,16 +54,6 @@ class CompetitionFragment : Fragment() {
         }
         playerAdapter.submitList(playerList)
     }
-
-//    private fun saveUserList(playerList: List<Player>) {
-//        // Convert the list of User objects to a JSON string
-//        val gson = Gson()
-//        val jsonString = gson.toJson(userList)
-//
-//        // Save the JSON string to SharedPreferences
-//        editor.putString("user_list", jsonString)
-//        editor.apply()
-//    }
 
     private fun createVinNum(listPlayer: MutableList<Player>): Players {
         listPlayer.map {

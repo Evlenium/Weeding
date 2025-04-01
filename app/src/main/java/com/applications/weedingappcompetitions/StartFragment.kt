@@ -35,6 +35,7 @@ class StartFragment : Fragment() {
         editText.setTextIsSelectable(true)
         val ic = editText.onCreateInputConnection(EditorInfo())
         keyboard.setInputConnection(ic)
+        editText.isFocusable = false
         keyboard.mButtonEnter?.setOnClickListener {
             applyNumParticipants()
         }
