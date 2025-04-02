@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.applications.weedingappcompetitions.databinding.FragmentGamerBinding
+import kotlin.math.abs
 
 class FragmentGamer : Fragment() {
     private var _binding: FragmentGamerBinding? = null
@@ -26,7 +27,6 @@ class FragmentGamer : Fragment() {
             requireArguments().getParcelable(ARGS_PLAYER)
         }
     }
-    private var inputString = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +38,7 @@ class FragmentGamer : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var inputString = ""
         with(binding) {
             editTextNumWeight.apply {
                 setRawInputType(InputType.TYPE_CLASS_TEXT)
@@ -53,42 +54,55 @@ class FragmentGamer : Fragment() {
                 onTextChanged = { s, start, before, count -> },
                 afterTextChanged = { s -> inputString = s.toString() })
             buttonApply.setOnClickListener {
-                checkWinner()
+                checkWinner(inputString, player!!)
             }
-            keyboardWeight.mButtonEnter?.setOnClickListener { checkWinner() }
+            keyboardWeight.mButtonEnter?.setOnClickListener { checkWinner(inputString, player!!) }
         }
     }
 
-    private fun checkWinner() {
+    private fun checkWinner(inputString: String, gamer: Player) {
         if (inputString.isEmpty()) {
             Toast.makeText(requireContext(), "Введите вес", Toast.LENGTH_SHORT).show()
         } else {
-            if (player?.vinNum!! > inputString.toInt()) {
-                binding.textViewColdHot.text = "Холодно"
-                binding.textViewColdHot.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.blue
-                    )
-                )
-            } else if (player?.vinNum!! < inputString.toInt()) {
-                binding.textViewColdHot.text = "Тепло"
-                binding.textViewColdHot.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.red
-                    )
-                )
-            } else {
-                binding.textViewColdHot.text = "Победитель!"
-                binding.textViewColdHot.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.green
-                    )
-                )
+            val input: Int = inputString.toInt()
+            if (gamer.vinNum == input) {
+                bindingTextView("Победитель!", R.color.green)
+                return
             }
+            if (gamer.lastNum == -1) {
+                if (abs(player?.vinNum!! - input) <= 3) {
+                    bindingTextView("Тепло", R.color.red)
+                } else {
+                    bindingTextView("Холодно", R.color.blue)
+                }
+            } else {
+                val previousDifference = abs(player?.vinNum!! - gamer.lastNum)
+                val currentDifference = abs(player?.vinNum!! - input)
+                if (previousDifference < currentDifference && gamer.lastNum != input) {
+                    bindingTextView("Холоднее", R.color.blue)
+                } else if (previousDifference > currentDifference && gamer.lastNum != input) {
+                    bindingTextView("Теплее", R.color.red)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Вы ввели значение, которое уже было",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            val localStorage = LocalStorage(requireContext())
+            localStorage.updateList(input, gamer)
         }
+    }
+
+    private fun bindingTextView(s: String, green: Int) {
+        binding.textViewColdHot.text = s
+        binding.textViewColdHot.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                green
+            )
+        )
     }
 
     override fun onDestroyView() {

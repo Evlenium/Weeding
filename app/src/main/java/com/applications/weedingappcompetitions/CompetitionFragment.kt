@@ -1,6 +1,5 @@
 package com.applications.weedingappcompetitions
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.applications.weedingappcompetitions.databinding.FragmentCompetitionBinding
-import com.google.gson.Gson
 
 class CompetitionFragment : Fragment() {
 
@@ -32,20 +30,23 @@ class CompetitionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPreferences =
-            requireContext().getSharedPreferences("players", Context.MODE_PRIVATE)
-        val gson = Gson()
         val playerList =
-            MutableList(numParticipants) { index -> Player(id = index, name = "", vinNum = 0) }
+            MutableList(numParticipants) { index ->
+                Player(
+                    id = index,
+                    name = "",
+                    vinNum = 0,
+                    lastNum = -1
+                )
+            }
         val playerAdapter = PlayerAdapter(playerList)
-        sharedPreferences.edit().putString("players", gson.toJson(playerList)).apply()
         with(binding) {
             recyclerView.adapter = playerAdapter
             buttonApply.setOnClickListener {
                 if (!checkEmptyFields(playerList)) {
+                    createVinNum(playerList)
                     findNavController().navigate(
                         R.id.action_competitionFragment_to_gamingFragment,
-                        GamersFragment.createArgs(createVinNum(playerList))
                     )
                 } else {
                     showMessage()
@@ -55,11 +56,12 @@ class CompetitionFragment : Fragment() {
         playerAdapter.submitList(playerList)
     }
 
-    private fun createVinNum(listPlayer: MutableList<Player>): Players {
+    private fun createVinNum(listPlayer: MutableList<Player>) {
+        val localStorage = LocalStorage(requireContext())
         listPlayer.map {
             it.vinNum = (0..13).random()
         }
-        return Players(listPlayer)
+        localStorage.savePlayerList(listPlayer)
     }
 
     private fun checkEmptyFields(list: MutableList<Player>) =

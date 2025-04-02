@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        val localStorage = LocalStorage(context = this)
+        localStorage.clearSharedPreference()
         _binding = null
     }
 }
