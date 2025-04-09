@@ -4,5 +4,5 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Player(val id: Int, var name: String, var vinNum: Int) :
+data class Player(val id: Int, var name: String, var vinNum: Int, var lastNum: Int) :
     Parcelable
